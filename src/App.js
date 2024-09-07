@@ -42,7 +42,6 @@ const MapWithWebGLImageOverlay = () => {
 function App() {
   return (
     <div className="App">
-      <h1>Map with Image Overlay</h1>
       <MapWithWebGLImageOverlay />
     </div>
   );
