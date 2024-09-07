@@ -37,6 +37,29 @@ html,
   width: 600px;
 }
 
+.search-bar {
+  /* background-color: lightgrey; */
+  padding: 10px;
+  text-align: -webkit-center;
+}
+
+input {
+  font-size: larger;
+}
+
+button {
+  font-size: larger;
+  margin: 5px;
+}
+
+.ulSearch {
+  border: 1px solid #ccc;
+  max-width: 200px;
+  margin-top: 5px;
+  padding: 7px;
+  list-style: none;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

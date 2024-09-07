@@ -98,32 +98,34 @@ const MapWithWebGLImageOverlay = () => {
   return (
     <div className="map-container">
       {/* Search bar for finding images by name */}
-      <input
-        type="text"
-        placeholder="Try: Pikachu / Squirtle"
-        value={searchTerm}
-        onChange={handleInputChange}
-      />
-      <button onClick={() => handleSearch(searchTerm)}>Search</button>
+      <div className='search-bar'>
+        <input
+          type="text"
+          placeholder="Try: Pikachu / Squirtle"
+          value={searchTerm}
+          onChange={handleInputChange}
+        />
+        <button onClick={() => handleSearch(searchTerm)}>Search</button>
 
-      {/* Suggestions dropdown */}
-      {suggestions.length > 0 && (
-        <ul style={{ border: '1px solid #ccc', maxWidth: '200px', marginTop: '5px', padding: '5px', listStyle: 'none' }}>
-          {suggestions.map((suggestion, index) => (
-            <li
-              key={index}
-              style={{ cursor: 'pointer', padding: '2px 5px' }}
-              onClick={() => {
-                setSearchTerm(suggestion);
-                handleSearch(suggestion);
-                setSuggestions([]);
-              }}
-            >
-              {suggestion}
-            </li>
-          ))}
-        </ul>
-      )}
+        {/* Suggestions dropdown */}
+        {suggestions.length > 0 && (
+          <ul className='ulSearch'>
+            {suggestions.map((suggestion, index) => (
+              <li
+                key={index}
+                style={{ cursor: 'pointer', padding: '1px 1px' }}
+                onClick={() => {
+                  setSearchTerm(suggestion);
+                  handleSearch(suggestion);
+                  setSuggestions([]);
+                }}
+              >
+                {suggestion}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
 
       {/* Map component */}
       <Map
