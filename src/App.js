@@ -32,10 +32,10 @@ const MapWithWebGLImageOverlay = () => {
       name: 'Bulbasaur',
       url: 'https://images.pokemontcg.io/base1/44.png',
       coordinates: [
-        [34.774220, 32.085004],
-        [34.781591, 32.085004],
-        [34.781591, 32.077872],
-        [34.774220, 32.077872]
+        [34.761824, 32.065728], // Top-left corner (longitude, latitude)
+        [34.764731, 32.065728], // Top-right corner (longitude, latitude)
+        [34.764731, 32.062893], // Bottom-right corner (longitude, latitude)
+        [34.761824, 32.062893]  // Bottom-left corner (longitude, latitude)
       ]
     },
     {
