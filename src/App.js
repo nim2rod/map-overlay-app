@@ -3,7 +3,8 @@ import { Map, Layer, Source } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './App.css';
 
-const MAPBOX_TOKEN = 'pk.eyJ1IjoibmltMmRldiIsImEiOiJjbTBzYmJwODUwaXVhMmpzaDQ0MWs2dWRwIn0.SSs14OfY72D_6fKKY5NGyg'; // Replace with your Mapbox token
+// const MAPBOX_TOKEN = 'pk.eyJ1IjoibmltMmRldiIsImEiOiJjbThmcnJiaWswaGJyMmtxdHV3Nnh2c3FpIn0.FEate-4M3TWvNqxGbjc8RQ'
+const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN
 
 const MapWithWebGLImageOverlay = () => {
   // Define the images with names and coordinates
