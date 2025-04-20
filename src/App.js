@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Map, Layer, Source } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import throttle from 'lodash.throttle'
 import './App.css';
 
-// const MAPBOX_TOKEN = 'pk.eyJ1IjoibmltMmRldiIsImEiOiJjbThmcnJiaWswaGJyMmtxdHV3Nnh2c3FpIn0.FEate-4M3TWvNqxGbjc8RQ'
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN
 
 const MapWithWebGLImageOverlay = () => {
@@ -19,6 +19,7 @@ const MapWithWebGLImageOverlay = () => {
         [34.766849, 32.091004]
       ]
     },
+
     {
       name: 'Pikachu',
       url: 'https://m.media-amazon.com/images/I/51TIbI-assL._AC_UF894,1000_QL80_.jpg',
@@ -49,7 +50,7 @@ const MapWithWebGLImageOverlay = () => {
         [34.784500, 32.062868]
       ]
     }
-  ];
+  ]
 
   // State for map view
   const [viewState, setViewState] = useState({
@@ -57,7 +58,6 @@ const MapWithWebGLImageOverlay = () => {
     latitude: 32.0953,
     zoom: 13
   });
-
   // State for search
   const [searchTerm, setSearchTerm] = useState('');
   const [suggestions, setSuggestions] = useState([]);
@@ -94,7 +94,14 @@ const MapWithWebGLImageOverlay = () => {
     } else {
       setSuggestions([]);
     }
-  };
+  }
+
+  const handleMove = useCallback(
+    throttle((evt) => {
+      setViewState(evt.viewState);
+    }, 100), // limit updates to once every 100ms
+    []
+  )
 
   return (
     <div className="map-container">
@@ -132,7 +139,8 @@ const MapWithWebGLImageOverlay = () => {
       <Map
         mapboxAccessToken={MAPBOX_TOKEN}
         viewState={viewState} // Use viewState to control the map's current state
-        onMove={(evt) => setViewState(evt.viewState)} // Update view state on map move
+        // onMove={(evt) => setViewState(evt.viewState)} // Update view state on map move
+        onMove= {handleMove}
         style={{ width: '100%', height: '500px' }}
         mapStyle="mapbox://styles/mapbox/streets-v11"
       >
@@ -159,7 +167,7 @@ const MapWithWebGLImageOverlay = () => {
       </Map>
     </div>
   );
-};
+}
 
 function App() {
   return (
