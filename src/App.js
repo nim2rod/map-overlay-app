@@ -1,8 +1,8 @@
-import React, { useState, useCallback } from 'react';
-import { Map, Layer, Source } from 'react-map-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
+import React, { useState, useCallback } from 'react'
+import { Map, Layer, Source } from 'react-map-gl'
+import 'mapbox-gl/dist/mapbox-gl.css'
 import throttle from 'lodash.throttle'
-import './App.css';
+import './App.css'
 
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN
 
@@ -57,48 +57,48 @@ const MapWithWebGLImageOverlay = () => {
     longitude: 34.7702,
     latitude: 32.0953,
     zoom: 13
-  });
+  })
   // State for search
-  const [searchTerm, setSearchTerm] = useState('');
-  const [suggestions, setSuggestions] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('')
+  const [suggestions, setSuggestions] = useState([])
 
   // Handle search and focus on the desired image
   const handleSearch = (name) => {
-    const foundImage = images.find((image) => image.name.toLowerCase() === name.toLowerCase());
+    const foundImage = images.find((image) => image.name.toLowerCase() === name.toLowerCase())
     if (foundImage) {
-      console.log('foundImage: ', foundImage);
+      console.log('foundImage: ', foundImage)
       // Set the view to focus on the searched image
       setViewState({
         ...viewState, // Preserve existing view state values
         longitude: (foundImage.coordinates[0][0] + foundImage.coordinates[1][0]) / 2,
         latitude: (foundImage.coordinates[0][1] + foundImage.coordinates[2][1]) / 2,
         zoom: 13
-      });
+      })
     } else {
-      alert('Image not found');
+      alert('Image not found')
     }
-  };
+  }
 
   // Handle input change and filter suggestions
   const handleInputChange = (e) => {
-    const value = e.target.value;
-    setSearchTerm(value);
+    const value = e.target.value
+    setSearchTerm(value)
 
     if (value) {
       const filteredSuggestions = images
         .filter((image) =>
           image.name.toLowerCase().startsWith(value.toLowerCase())
         )
-        .map((image) => image.name);
-      setSuggestions(filteredSuggestions);
+        .map((image) => image.name)
+      setSuggestions(filteredSuggestions)
     } else {
-      setSuggestions([]);
+      setSuggestions([])
     }
   }
 
   const handleMove = useCallback(
     throttle((evt) => {
-      setViewState(evt.viewState);
+      setViewState(evt.viewState)
     }, 100), // limit updates to once every 100ms
     []
   )
@@ -123,9 +123,9 @@ const MapWithWebGLImageOverlay = () => {
                 key={index}
                 style={{ cursor: 'pointer', padding: '1px 1px' }}
                 onClick={() => {
-                  setSearchTerm(suggestion);
-                  handleSearch(suggestion);
-                  setSuggestions([]);
+                  setSearchTerm(suggestion)
+                  handleSearch(suggestion)
+                  setSuggestions([])
                 }}
               >
                 {suggestion}
@@ -139,7 +139,6 @@ const MapWithWebGLImageOverlay = () => {
       <Map
         mapboxAccessToken={MAPBOX_TOKEN}
         viewState={viewState} // Use viewState to control the map's current state
-        // onMove={(evt) => setViewState(evt.viewState)} // Update view state on map move
         onMove= {handleMove}
         style={{ width: '100%', height: '500px' }}
         mapStyle="mapbox://styles/mapbox/streets-v11"
@@ -166,7 +165,7 @@ const MapWithWebGLImageOverlay = () => {
         ))}
       </Map>
     </div>
-  );
+  )
 }
 
 function App() {
@@ -174,7 +173,7 @@ function App() {
     <div className="App">
       <MapWithWebGLImageOverlay />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
